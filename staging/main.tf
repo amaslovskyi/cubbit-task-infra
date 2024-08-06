@@ -23,11 +23,11 @@ locals {
 }
 
 module "ec2_instance" {
-  source = "./modules/ec2"
+  source = "../modules/ec2"
 
   ami_id               = data.aws_ami.amazonlinux_2023.id
   instance_type        = var.instance_type
-  security_group_ids   = module.security_group.security_group_id
+  security_group_ids   = [module.security_group.security_group_id]
   subnet_id            = module.vpc.public_subnet_ids[0]
   iam_instance_profile = module.security_group.instance_profile_id
 
@@ -46,7 +46,7 @@ data "aws_ami" "amazonlinux_2023" {
 }
 
 module "vpc" {
-  source = "./modules/net"
+  source = "../modules/net"
 
   vpc_cidr             = var.vpc_cidr
   public_subnet_cidrs  = var.public_subnet_cidrs
@@ -57,7 +57,7 @@ module "vpc" {
 }
 
 module "security_group" {
-  source = "./modules/sec"
+  source = "../modules/sec"
 
   vpc_id      = module.vpc.vpc_id
   common_tags = local.common_tags
