@@ -7,7 +7,6 @@ resource "aws_instance" "this" {
   ami           = var.ami_id
   instance_type = var.instance_type
 
-  # vpc_security_group_ids = concat(var.security_group_ids, [aws_security_group.k3s.id])
   vpc_security_group_ids = var.security_group_ids
   subnet_id              = var.subnet_id
   iam_instance_profile   = var.iam_instance_profile
@@ -15,7 +14,10 @@ resource "aws_instance" "this" {
 
   user_data = <<-EOF
               #!/bin/bash
-              curl -sfL https://get.k3s.io | sh - --tls-san mygoappcluster.maslovskyi.dev --node-name k3s-cluster
+              dnf update -y
+              dnf install -y container-selinux
+              dnf install -y https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-1.1-1.el8.noarch.rpm
+              curl -sfL https://get.k3s.io | sh -s - --tls-san mygoappcluster.maslovskyi.dev --node-name k3s-cluster
               EOF
 
   tags = merge(
