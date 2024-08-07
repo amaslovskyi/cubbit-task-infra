@@ -31,26 +31,27 @@ resource "aws_instance" "this" {
 }
 
 ## k3s cert output
-resource "null_resource" "get_k3s_config" {
-  depends_on = [aws_instance.this]
+# resource "null_resource" "get_k3s_config" {
+#   depends_on = [aws_instance.this]
 
-  provisioner "remote-exec" {
-    inline = [
-      "cat /etc/rancher/k3s/k3s.yaml"
-    ]
+#   provisioner "remote-exec" {
+#     inline = [
+#       "cat /etc/rancher/k3s/k3s.yaml"
+#     ]
 
-    connection {
-      type  = "ssh"
-      user  = "ec2-user"
-      host  = aws_instance.this.public_ip
-      agent = true
-    }
-  }
-}
+#     connection {
+#       type  = "ssh"
+#       user  = "ec2-user"
+#       host  = aws_instance.this.public_ip
+#       # private_key = file("/path/to/your/private/key")
+#       agent = true
+#     }
+#   }
+# }
 
-output "k3s_config" {
-  value = null_resource.get_k3s_config
-}
+# output "k3s_config" {
+#   value = null_resource.get_k3s_config
+# }
 
 output "instance_public_ip" {
   value = aws_instance.this.public_ip
