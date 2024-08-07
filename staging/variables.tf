@@ -61,3 +61,16 @@ variable "public_key" {
   type        = string
   default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7uolfLV01cHFQbDuTDZop7RnYoK1LSeghlGarzIO5NDZO0eNlCqsSogeqD7hJ1fG+Z4C0P34n/6CFDAt1FUYfilgET9DgP5WBM1iTPA8OfTqQpN2ALlTZkFbaohqUW7InkmQ6+p23mcHdaRQoZ1dp+VtnhJGDE3tPQTx107h1awe+PzyIg1fA/ztRkBXZzR5a497D57qVf8HNpziYlmHnD975oKEd3Mcfr8eD1JwcIBp+ptFJSXaDlZ9kGihOIouA88Xjc+nL8aaYkTSfvPZlx5CTj/NKzQPxywhWf5sDhAEpLnIX/FUxoIPfH121PE6a2scflo8PmI2SP9yif/VvL7f9vxRjNnXE51PK7umzJB+MvMOADDJB8lqxj9zARNRwihdcJOQ9ImEy0Ok3CXwaEYJrZd3x8+9fsR14hazCeVZNg9iDH/dsJfsknhCbHzl9mOnUkoFC1v/ethDEkBqpvxcIKf5S/ov8pg09qg0S42we69wabtzofLBkgRfJ58E= Shatten@MacBook-Pro.local"
 }
+
+variable "security_group_ids" {
+  type    = list(string)
+  default = []
+}
+
+locals {
+  all_security_group_ids = concat(
+    var.security_group_ids,
+    [module.security_group.security_group_id],
+    module.security_group.k3s_security_group_id
+  )
+}
