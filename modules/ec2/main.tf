@@ -17,7 +17,9 @@ resource "aws_instance" "this" {
               dnf update -y
               dnf install -y container-selinux
               dnf install -y https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-1.1-1.el8.noarch.rpm
-              curl -sfL https://get.k3s.io | sh -s - --tls-san mygoappcluster.maslovskyi.dev --node-name k3s-cluster
+              PUBLIC_IP=$(curl -s http://ifconfig.me)
+              curl -sfL https://get.k3s.io | sh -s - --tls-san $PUBLIC_IP --node-name k3s-cluster
+              cat /etc/rancher/k3s/k3s.yaml
               EOF
 
   tags = merge(
@@ -26,4 +28,30 @@ resource "aws_instance" "this" {
       Name = "${var.common_tags.Project}-${var.common_tags.Environment}-instance"
     }
   )
+}
+
+## k3s cert output
+resource "null_resource" "get_k3s_config" {
+  depends_on = [aws_instance.this]
+
+  provisioner "remote-exec" {
+    inline = [
+      "cat /etc/rancher/k3s/k3s.yaml"
+    ]
+
+    connection {
+      type  = "ssh"
+      user  = "ec2-user"
+      host  = aws_instance.this.public_ip
+      agent = true
+    }
+  }
+}
+
+output "k3s_config" {
+  value = null_resource.get_k3s_config
+}
+
+output "instance_public_ip" {
+  value = aws_instance.this.public_ip
 }
