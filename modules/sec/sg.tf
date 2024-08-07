@@ -4,6 +4,7 @@ resource "aws_security_group" "this" {
   vpc_id      = var.vpc_id
 
   ingress {
+    description = "mygoapp-NodePort"
     from_port   = 32581
     to_port     = 32581
     protocol    = "tcp"
@@ -11,8 +12,17 @@ resource "aws_security_group" "this" {
   }
 
   ingress {
+    description = "https"
     from_port   = 443
     to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "http"
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
