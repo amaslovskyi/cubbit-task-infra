@@ -27,7 +27,7 @@ module "ec2_instance" {
 
   ami_id               = data.aws_ami.amazonlinux_2023.id
   instance_type        = var.instance_type
-  security_group_ids   = [module.security_group.security_group_id]
+  security_group_ids   = [module.security_group.security_group_id, module.security_group.k3s_security_group_id]
   subnet_id            = module.vpc.public_subnet_ids[0]
   iam_instance_profile = module.security_group.instance_profile_id
   public_key           = var.public_key
