@@ -18,7 +18,7 @@ resource "aws_instance" "this" {
               dnf install -y container-selinux
               dnf install -y https://rpm.rancher.io/k3s/stable/common/centos/8/noarch/k3s-selinux-1.1-1.el8.noarch.rpm
               PUBLIC_IP=$(curl -s http://ifconfig.me)
-              curl -sfL https://get.k3s.io | sh -s - --tls-san mygoappcluster.maslovskyi.dev --tls-san $PUBLIC_IP --node-name k3s-cluster
+              curl -sfL https://get.k3s.io | sh -s - --tls-san $PUBLIC_IP --node-name k3s-cluster
               EOF
 
   tags = merge(
