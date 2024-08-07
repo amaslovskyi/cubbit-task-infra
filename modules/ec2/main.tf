@@ -20,7 +20,7 @@ resource "aws_instance" "this" {
 }
 
 resource "aws_eip" "this" {
-  domain   = "vpc"
+  # domain   = "vpc"
   instance = aws_instance.this.id
 
   tags = merge(
