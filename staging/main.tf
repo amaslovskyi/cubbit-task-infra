@@ -30,8 +30,8 @@ module "ec2_instance" {
   security_group_ids   = [module.security_group.security_group_id]
   subnet_id            = module.vpc.public_subnet_ids[0]
   iam_instance_profile = module.security_group.instance_profile_id
-
-  common_tags = local.common_tags
+  public_key           = var.public_key
+  common_tags          = local.common_tags
 }
 
 ## extract AMI
