@@ -58,5 +58,6 @@ variable "availability_zones" {
 # public key path
 variable "public_key" {
   description = "The path to the public key for SSH access"
+  default     = ""
   type        = string
 }
