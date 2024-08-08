@@ -13,6 +13,7 @@ This repository contains Terraform configurations to set up AWS infrastructure u
 ├── prod/
 ├── staging/
 └── README.md
+```
 
 ## Prerequisites
 
