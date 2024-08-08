@@ -2,6 +2,7 @@
 
 This repository contains Terraform configurations to set up AWS infrastructure using a modular approach. The setup includes EC2 instances, VPC, and security groups.
 
+```markdown
 ## Repository Structure
 
 .
