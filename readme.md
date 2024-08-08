@@ -33,7 +33,7 @@ cd <repository-name>
 If you're using Terraform Cloud as your backend:
 
 1. Create an organization in Terraform Cloud if you haven't already.
-2. Create a new workspace named staging-cubbit-task-infra/prod-cubbit-task-infra (or update the name in the configuration).
+2. Create a new workspace named `staging-cubbit-task-infra/prod-cubbit-task-infra` (or update the name in the configuration).
 3. Configure your Terraform Cloud API token:
 
 ```bash
@@ -42,10 +42,10 @@ terraform login
 
 ### 4. Set Up Variables in tfcloud (Optional)
 
-- "region"
-- "AWS_ACCESS_KEY_ID"
-- "AWS_SECRET_ACCESS_KEY"
-- "public_key"
+- `region`
+- `AWS_ACCESS_KEY_I`
+- `AWS_SECRET_ACCESS_KEY`
+- `public_key`
 
 ### 4. Initialize Terraform
 
@@ -58,15 +58,15 @@ terraform init
 
 ## Modules
 
-The modules/ directory contains reusable Terraform modules:
+The `modules/` directory contains reusable Terraform modules:
 
-ec2/: EC2 instance configurations
-net/: Networking configurations (VPC, subnets, etc.)
-sec/: Security group configurations
+`ec2/:` EC2 instance configurations
+`net/:` Networking configurations (VPC, subnets, etc.)
+`sec/:` Security group configurations
 
 ### Notes
 
-After apply infrastructure to cloud retrieve k8s config and node ip for further integration with git app repo:
+After apply infrastructure to cloud retrieve `k8s config` and `node ip` for further integration with git app repo:
 
 ```bash
 cat /etc/rancher/k3s/k3s.yaml
