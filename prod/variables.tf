@@ -55,3 +55,19 @@ variable "availability_zones" {
   default     = []
 }
 
+# public key path
+variable "public_key" {
+  description = "The path to the public key for SSH access"
+  type        = string
+  default     = ""
+}
+
+variable "security_group_ids" {
+  type    = list(string)
+  default = []
+}
+locals {
+  security_group_ids = concat(
+    [module.security_group.security_group_id], [module.security_group.k3s_security_group_id]
+  )
+}

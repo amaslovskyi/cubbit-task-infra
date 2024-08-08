@@ -27,11 +27,11 @@ module "ec2_instance" {
 
   ami_id               = data.aws_ami.amazonlinux_2023.id
   instance_type        = var.instance_type
-  security_group_ids   = [module.security_group.security_group_id]
+  security_group_ids   = local.security_group_ids
   subnet_id            = module.vpc.public_subnet_ids[0]
   iam_instance_profile = module.security_group.instance_profile_id
-
-  common_tags = local.common_tags
+  public_key           = var.public_key
+  common_tags          = local.common_tags
 }
 
 ## extract AMI

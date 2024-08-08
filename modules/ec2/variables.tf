@@ -28,3 +28,10 @@ variable "common_tags" {
   description = "Common tags to be applied to all resources"
   type        = map(string)
 }
+
+# public key path
+variable "public_key" {
+  description = "The path to the public key for SSH access"
+  type        = string
+  default     = ""
+}

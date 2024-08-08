@@ -36,6 +36,15 @@ resource "aws_security_group" "k3s" {
     cidr_blocks = ["0.0.0.0/0"] # Consider restricting this to your VPC CIDR
   }
 
+  # ssh temporary
+  ingress {
+    description = "ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Consider restricting this to your VPC CIDR
+  }
+
   # Allow outbound traffic
   egress {
     from_port   = 0
