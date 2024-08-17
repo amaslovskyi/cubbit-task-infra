@@ -53,7 +53,6 @@ resource "aws_subnet" "private" {
 
 resource "aws_eip" "nat" {
   for_each = aws_subnet.public
-  domain   = "vpc"
 
   tags = merge(
     var.common_tags,
