@@ -71,3 +71,15 @@ locals {
     [module.security_group.security_group_id], [module.security_group.k3s_security_group_id]
   )
 }
+
+variable "mygoapp_username" {
+  description = "Username for mygoapp"
+  type        = string
+  sensitive   = true
+}
+
+variable "mygoapp_password" {
+  description = "Password for mygoapp"
+  type        = string
+  sensitive   = true
+}
